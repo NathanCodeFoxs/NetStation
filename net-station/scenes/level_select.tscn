@@ -1,0 +1,320 @@
+[gd_scene format=3 uid="uid://cfaxewb6xb7nx"]
+
+[ext_resource type="Script" uid="uid://c7wtvge53vscy" path="res://scripts/level_select.gd" id="1_3shnc"]
+
+[node name="LevelSelect" type="Control" unique_id=465762011]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3shnc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1547264744]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11764706, 0.078431375, 0.19607843, 1)
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1905499041]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = 60.0
+offset_right = 65.5
+offset_bottom = 83.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.39215687, 1, 1, 1)
+theme_override_font_sizes/font_size = 56
+text = "Select Your Level"
+horizontal_alignment = 1
+
+[node name="LevelGrid" type="GridContainer" parent="TitleLabel" unique_id=705066942]
+custom_minimum_size = Vector2(900, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 211.5
+offset_right = 20.0
+offset_bottom = 251.5
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="Level1Button" type="Button" parent="TitleLabel/LevelGrid" unique_id=1075981074]
+custom_minimum_size = Vector2(250, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="ButtonContent" type="VBoxContainer" parent="TitleLabel/LevelGrid/Level1Button" unique_id=1106981693]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="LevelNumber" type="Label" parent="TitleLabel/LevelGrid/Level1Button/ButtonContent" unique_id=2104461098]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.23529412, 1)
+theme_override_font_sizes/font_size = 32
+text = "LEVEL 1"
+horizontal_alignment = 1
+
+[node name="LevelTitle" type="Label" parent="TitleLabel/LevelGrid/Level1Button/ButtonContent" unique_id=1124243378]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Basic Connection"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LevelType" type="Label" parent="TitleLabel/LevelGrid/Level1Button/ButtonContent" unique_id=1086467470]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78431374, 0.78431374, 0.78431374, 1)
+theme_override_font_sizes/font_size = 14
+text = "Type: Quiz"
+horizontal_alignment = 1
+
+[node name="Level2Button" type="Button" parent="TitleLabel/LevelGrid" unique_id=1009031638]
+custom_minimum_size = Vector2(250, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="ButtonContent" type="VBoxContainer" parent="TitleLabel/LevelGrid/Level2Button" unique_id=529141413]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="LevelNumber" type="Label" parent="TitleLabel/LevelGrid/Level2Button/ButtonContent" unique_id=1781991433]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.23529412, 1)
+theme_override_font_sizes/font_size = 32
+text = "LEVEL 2"
+horizontal_alignment = 1
+
+[node name="LevelTitle" type="Label" parent="TitleLabel/LevelGrid/Level2Button/ButtonContent" unique_id=100414432]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "IP Addressing"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LevelType" type="Label" parent="TitleLabel/LevelGrid/Level2Button/ButtonContent" unique_id=1348089446]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78431374, 0.78431374, 0.78431374, 1)
+theme_override_font_sizes/font_size = 14
+text = "Type: Rail Track"
+horizontal_alignment = 1
+
+[node name="LockIcon" type="TextureRect" parent="TitleLabel/LevelGrid/Level2Button" unique_id=926402761]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LockedLabel" type="Label" parent="TitleLabel/LevelGrid/Level2Button" unique_id=2066870087]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -11.5
+offset_right = 44.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8980392, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "🔒 LOCKED"
+
+[node name="Level3Button" type="Button" parent="TitleLabel/LevelGrid" unique_id=1650989813]
+custom_minimum_size = Vector2(250, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="ButtonContent" type="VBoxContainer" parent="TitleLabel/LevelGrid/Level3Button" unique_id=640218015]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="LevelNumber" type="Label" parent="TitleLabel/LevelGrid/Level3Button/ButtonContent" unique_id=364439885]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.23529412, 1)
+theme_override_font_sizes/font_size = 32
+text = "LEVEL 3"
+horizontal_alignment = 1
+
+[node name="LevelTitle" type="Label" parent="TitleLabel/LevelGrid/Level3Button/ButtonContent" unique_id=1065508939]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Subnetting"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LevelType" type="Label" parent="TitleLabel/LevelGrid/Level3Button/ButtonContent" unique_id=142869032]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78431374, 0.78431374, 0.78431374, 1)
+theme_override_font_sizes/font_size = 14
+text = "Type: Quiz"
+horizontal_alignment = 1
+
+[node name="LockedLabel" type="Label" parent="TitleLabel/LevelGrid/Level3Button" unique_id=487757373]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -11.5
+offset_right = 44.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8980392, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "🔒 LOCKED"
+
+[node name="Level4Button" type="Button" parent="TitleLabel/LevelGrid" unique_id=270717048]
+custom_minimum_size = Vector2(250, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="ButtonContent" type="VBoxContainer" parent="TitleLabel/LevelGrid/Level4Button" unique_id=1887183733]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="LevelNumber" type="Label" parent="TitleLabel/LevelGrid/Level4Button/ButtonContent" unique_id=864705817]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.23529412, 1)
+theme_override_font_sizes/font_size = 32
+text = "Level 4"
+horizontal_alignment = 1
+
+[node name="LevelTitle" type="Label" parent="TitleLabel/LevelGrid/Level4Button/ButtonContent" unique_id=908740772]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Routing"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LevelType" type="Label" parent="TitleLabel/LevelGrid/Level4Button/ButtonContent" unique_id=421747379]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78431374, 0.78431374, 0.78431374, 1)
+theme_override_font_sizes/font_size = 14
+text = "Type: Rail Track"
+horizontal_alignment = 1
+
+[node name="LockedLabel" type="Label" parent="TitleLabel/LevelGrid/Level4Button" unique_id=845679677]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -11.5
+offset_right = 44.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8980392, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "🔒 LOCKED"
+
+[node name="Level5Button" type="Button" parent="TitleLabel/LevelGrid" unique_id=439058342]
+custom_minimum_size = Vector2(250, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="ButtonContent" type="VBoxContainer" parent="TitleLabel/LevelGrid/Level5Button" unique_id=844174694]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="LevelNumber" type="Label" parent="TitleLabel/LevelGrid/Level5Button/ButtonContent" unique_id=1474855087]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.23529412, 1)
+theme_override_font_sizes/font_size = 32
+text = "Level 5"
+horizontal_alignment = 1
+
+[node name="LevelTitle" type="Label" parent="TitleLabel/LevelGrid/Level5Button/ButtonContent" unique_id=1438113384]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Protocols"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LevelType" type="Label" parent="TitleLabel/LevelGrid/Level5Button/ButtonContent" unique_id=1333704487]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78431374, 0.78431374, 0.78431374, 1)
+theme_override_font_sizes/font_size = 14
+text = "Type: Hybrid"
+horizontal_alignment = 1
+
+[node name="LockedLabel" type="Label" parent="TitleLabel/LevelGrid/Level5Button" unique_id=1485795881]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -11.5
+offset_right = 44.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8980392, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "🔒 LOCKED"
+
+[node name="BackButton" type="Button" parent="." unique_id=218097024]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 1
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 210.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 20
+text = "Back to Menu"

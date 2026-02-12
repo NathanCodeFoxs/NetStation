@@ -24,8 +24,7 @@ func update_level_access():
 		$LevelGrid/Level2Button,
 		$LevelGrid/Level3Button,
 		$LevelGrid/Level4Button,
-		$LevelGrid/Level5Button,
-		$LevelGrid/Level6Button
+		$LevelGrid/Level5Button
 	]
 	
 	for i in range(level_buttons.size()):

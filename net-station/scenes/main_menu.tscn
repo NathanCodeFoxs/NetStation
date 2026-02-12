@@ -56,7 +56,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 30
 
-[node name="StartButton" type="Button" parent="ButtonContainer" unique_id=2145092883]
+[node name="StartButton" type="Button" parent="ButtonContainer" unique_id=395446799]
 custom_minimum_size = Vector2(320, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28

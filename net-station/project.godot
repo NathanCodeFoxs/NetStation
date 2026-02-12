@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="NetStation"
+run/main_scene="uid://u0j4dhidi6mt"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

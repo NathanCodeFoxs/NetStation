@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://u0j4dhidi6mt"]
 
 [ext_resource type="Script" uid="uid://b2gbta2j0wpyj" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://k6giabxbblia" path="res://assets/backgrounds/menubg.png" id="2_ekxnf"]
 
 [node name="MainMenu" type="Control" unique_id=515550759]
 layout_mode = 3
@@ -11,14 +12,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=941932865]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.078431375, 0.11764706, 0.23529412, 1)
+[node name="Menubg" type="Sprite2D" parent="." unique_id=1285473146]
+position = Vector2(645.49994, 355.49994)
+scale = Vector2(1.1687499, 1.0263889)
+texture = ExtResource("2_ekxnf")
 
 [node name="TitleContainer" type="VBoxContainer" parent="." unique_id=2113204810]
 custom_minimum_size = Vector2(400, 120)
@@ -35,7 +32,7 @@ grow_horizontal = 2
 [node name="TitleLabel" type="Label" parent="TitleContainer" unique_id=1562321642]
 custom_minimum_size = Vector2(400, 120)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.39215687, 0.78431374, 1, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 72
 text = "NetStation"
 horizontal_alignment = 1

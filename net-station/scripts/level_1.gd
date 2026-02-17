@@ -8,9 +8,7 @@ var level_title = "Introduction to Networks"
 
 var slides = [
 	"What is a network?\n\nA network is a group of computers and devices that are connected together. Think of it like a team where all members can talk to each other and share things.",
-	
 	"Why do we need networks?\n\nWe use networks so that computers and devices can share files, access the internet, send messages, and use resources like printers. It makes working and sharing much easier!",
-	
 	"Example:\n\nImagine you're in your school's computer lab. There are many computers and a printer. Instead of each computer having its own printer, all the computers are connected to a single printer through a network.\n\nWhen you print your homework, your computer sends the print job over the network to the shared printer. This way, everyone in the lab can share the printer easily without needing a separate printer for each computer."
 ]
 
@@ -22,7 +20,7 @@ var quiz = [
 			"To connect devices so they can share information and resources",
 			"To turn off devices automatically"
 		],
-		"correct": 1  # Index of correct answer (0=A, 1=B, 2=C)
+		"correct": 1
 	},
 	{
 		"question": "Which of these is a common resource shared over a network?",
@@ -52,6 +50,7 @@ var current_step = 0
 var total_steps = 0
 var quiz_score = 0
 var in_quiz_mode = false
+var quiz_current_index = 0  # FIX: track quiz index separately
 
 # Node references
 @onready var modal_overlay = $ModalOverlay
@@ -81,6 +80,9 @@ func _ready():
 	answer_b.pressed.connect(_on_answer_selected.bind(1))
 	answer_c.pressed.connect(_on_answer_selected.bind(2))
 	
+	# FIX: Set train at START position (don't move it yet)
+	train_icon.position.x = 90
+	
 	# Start with popup hidden
 	modal_overlay.visible = false
 	popup_panel.visible = false
@@ -108,7 +110,6 @@ func hide_popup():
 	tween.set_parallel(true)
 	tween.tween_property(popup_panel, "scale", Vector2(0.8, 0.8), 0.2)
 	tween.tween_property(popup_panel, "modulate:a", 0.0, 0.2)
-	
 	await tween.finished
 	modal_overlay.visible = false
 	popup_panel.visible = false
@@ -125,36 +126,41 @@ func load_slide(index: int):
 	feedback_label.visible = false
 	nav_buttons.visible = true
 	
-	# Update buttons
+	# Update nav buttons
 	prev_button.disabled = (index == 0)
+	prev_button.visible = true
+	next_button.visible = true
+	next_button.disabled = false
 	
+	# Change button text on last slide
 	if index == slides.size() - 1:
 		next_button.text = "Start Quiz →"
 	else:
 		next_button.text = "Next →"
 	
-	update_train_position()
+	# FIX: Don't move train when loading, only move when progressing
 
 func load_quiz_question(index: int):
 	in_quiz_mode = true
+	quiz_current_index = index
 	var q = quiz[index]
 	
 	popup_title.text = "Quiz Time! 🎓"
 	content_text.text = q["question"]
 	progress_label.text = "Question %d / %d" % [index + 1, quiz.size()]
 	
-	# Show quiz elements, hide slide nav
+	# Show quiz elements, hide nav buttons
 	content_text.visible = true
 	answer_buttons_container.visible = true
 	feedback_label.visible = false
 	nav_buttons.visible = false
 	
-	# Set answers
+	# Set answer text
 	answer_a.text = "A) " + q["answers"][0]
 	answer_b.text = "B) " + q["answers"][1]
 	answer_c.text = "C) " + q["answers"][2]
 	
-	# Reset button states
+	# Reset all answer buttons
 	var buttons = [answer_a, answer_b, answer_c]
 	for btn in buttons:
 		btn.disabled = false
@@ -164,22 +170,26 @@ func _on_prev_pressed():
 	if current_step > 0:
 		current_step -= 1
 		load_slide(current_step)
+		# FIX: Move train backwards
+		update_train_position(current_step)
 
 func _on_next_pressed():
 	if current_step < slides.size() - 1:
-		# Next slide
+		# Go to next slide
 		current_step += 1
 		load_slide(current_step)
+		# FIX: Move train forward AFTER clicking next
+		update_train_position(current_step)
 	else:
-		# Start quiz
+		# Start quiz - move train to quiz start position
 		current_step = slides.size()
+		update_train_position(current_step)
 		load_quiz_question(0)
 
 func _on_answer_selected(answer_index: int):
-	var question_index = current_step - slides.size()
-	var q = quiz[question_index]
+	var q = quiz[quiz_current_index]
 	
-	# Disable all buttons
+	# Disable all buttons immediately
 	var buttons = [answer_a, answer_b, answer_c]
 	for btn in buttons:
 		btn.disabled = true
@@ -187,36 +197,39 @@ func _on_answer_selected(answer_index: int):
 	feedback_label.visible = true
 	
 	if answer_index == q["correct"]:
-		# Correct answer
+		# Correct!
 		quiz_score += 1
-		feedback_label.text = "✓ Correct!"
+		feedback_label.text = "✓ Correct! Well done!"
 		feedback_label.add_theme_color_override("font_color", Color.GREEN)
 		buttons[answer_index].modulate = Color(0.5, 1, 0.5)
 	else:
-		# Wrong answer
-		feedback_label.text = "✗ Incorrect. The correct answer was: " + ["A", "B", "C"][q["correct"]]
+		# Wrong
+		feedback_label.text = "✗ Incorrect. Correct answer: " + ["A", "B", "C"][q["correct"]]
 		feedback_label.add_theme_color_override("font_color", Color.RED)
 		buttons[answer_index].modulate = Color(1, 0.5, 0.5)
 		buttons[q["correct"]].modulate = Color(0.5, 1, 0.5)
 	
-	# Move train
-	update_train_position()
+	# FIX: Move train after answering
+	update_train_position(current_step + 1)
 	
-	# Wait then show next question or finish
+	# Wait then go to next question or finish
 	await get_tree().create_timer(2.0).timeout
 	
-	if question_index < quiz.size() - 1:
+	if quiz_current_index < quiz.size() - 1:
 		current_step += 1
-		load_quiz_question(question_index + 1)
+		load_quiz_question(quiz_current_index + 1)
 	else:
 		finish_level()
 
 func finish_level():
 	var percentage = (float(quiz_score) / quiz.size()) * 100
 	
+	# Move train to END (station)
+	update_train_position(total_steps)
+	
 	popup_title.text = "Level Complete! 🎉"
 	content_text.text = "Congratulations!\n\nYou scored %d out of %d (%.0f%%)\n\nYou've learned the basics of computer networks!" % [quiz_score, quiz.size(), percentage]
-	progress_label.text = ""
+	progress_label.text = "🎉 Level Complete!"
 	
 	answer_buttons_container.visible = false
 	feedback_label.visible = false
@@ -225,26 +238,32 @@ func finish_level():
 	prev_button.visible = false
 	next_button.text = "Back to Levels"
 	next_button.disabled = false
-	next_button.pressed.disconnect(_on_next_pressed)
+	
+	# FIX: Disconnect old signal before connecting new one
+	if next_button.pressed.is_connected(_on_next_pressed):
+		next_button.pressed.disconnect(_on_next_pressed)
 	next_button.pressed.connect(_on_finish_pressed)
 
 func _on_finish_pressed():
-	# TODO: Save that Level 1 is complete, unlock Level 2
 	get_tree().change_scene_to_file("res://scenes/level_select.tscn")
 
 func _on_close_pressed():
-	# Return to level select
 	get_tree().change_scene_to_file("res://scenes/level_select.tscn")
 
-func update_train_position():
-	# Calculate train position based on progress
-	var progress = float(current_step + 1) / total_steps
+# FIX: Train position now takes a step parameter
+func update_train_position(step: int):
+	# Clamp step so train doesn't go past station
+	step = clamp(step, 0, total_steps)
 	
-	# Train travels from X: 90 to X: 1150
-	var start_x = 90
-	var end_x = 1150
+	var progress = float(step) / float(total_steps)
+	
+	# Train travels from X: 90 (start) to X: 1150 (end station)
+	var start_x = 90.0
+	var end_x = 1150.0
 	var target_x = start_x + (progress * (end_x - start_x))
 	
-	# Animate train
+	# Animate train smoothly
 	var tween = create_tween()
-	tween.tween_property(train_icon, "position:x", target_x, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(train_icon, "position:x", target_x, 0.6).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	
+	print("Train moved to step %d/%d (%.0f%%)" % [step, total_steps, progress * 100])

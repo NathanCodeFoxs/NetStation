@@ -1,6 +1,5 @@
 extends Control
 
-# Track which levels are unlocked (save/load this later)
 var unlocked_levels = 1
 
 func _ready():
@@ -18,7 +17,6 @@ func _ready():
 	update_level_access()
 
 func update_level_access():
-	# Disable and gray out locked levels
 	var level_buttons = [
 		$LevelGrid/Level1Button,
 		$LevelGrid/Level2Button,
@@ -32,34 +30,27 @@ func update_level_access():
 		var button = level_buttons[i]
 		
 		if level_num > unlocked_levels:
-			# Lock this level
 			button.disabled = true
-			button.modulate = Color(0.5, 0.5, 0.5, 0.7)  # Gray out
-			
-			# Show lock label if it exists
+			button.modulate = Color(0.5, 0.5, 0.5, 0.7)
 			if button.has_node("LockedLabel"):
 				button.get_node("LockedLabel").visible = true
 		else:
-			# Unlock this level
 			button.disabled = false
-			button.modulate = Color(1, 1, 1, 1)  # Normal color
-			
-			# Hide lock label if it exists
+			button.modulate = Color(1, 1, 1, 1)
 			if button.has_node("LockedLabel"):
 				button.get_node("LockedLabel").visible = false
 
 func _on_level_pressed(level_number: int):
 	print("Loading Level ", level_number)
 	
-	# Load the appropriate level scene
-	match level_number:
-		1:
-			get_tree().change_scene_to_file("res://scenes/levels/level_1.tscn")
-		2:
-			get_tree().change_scene_to_file("res://scenes/levels/level_2.tscn")
-		3:
-			get_tree().change_scene_to_file("res://scenes/levels/level_3.tscn")
-		# Add more as you create them
+	# FIX: Added level 4 & 5 with safety check
+	var scene_path = "res://scenes/levels/level_%d.tscn" % level_number
+	
+	if ResourceLoader.exists(scene_path):
+		get_tree().change_scene_to_file(scene_path)
+	else:
+		print("Level %d scene not created yet!" % level_number)
+		# TODO: Show "Coming Soon" popup instead of crashing
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

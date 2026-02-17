@@ -47,8 +47,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6iamk")
 
-[node name="Background1" type="Sprite2D" parent="." unique_id=1922411950]
-position = Vector2(640, 362)
+[node name="Background1" type="TextureRect" parent="." unique_id=1221920860]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.9984375, 1.0083333)
 texture = ExtResource("1_ksju7")
 
@@ -202,6 +213,7 @@ horizontal_alignment = 1
 [node name="TopRightAnchor" type="Control" parent="PopupPanel" unique_id=389604240]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 8
 
 [node name="CloseButton" type="Button" parent="PopupPanel/TopRightAnchor" unique_id=442927629]
 custom_minimum_size = Vector2(40, 40)

@@ -1,7 +1,5 @@
 extends Control
 
-var unlocked_levels = 1
-
 func _ready():
 	# Connect all level buttons
 	$LevelGrid/Level1Button.pressed.connect(_on_level_pressed.bind(1))
@@ -29,7 +27,7 @@ func update_level_access():
 		var level_num = i + 1
 		var button = level_buttons[i]
 		
-		if level_num > unlocked_levels:
+		if not GameProgress.is_level_unlocked(level_num):
 			button.disabled = true
 			button.modulate = Color(0.5, 0.5, 0.5, 0.7)
 			if button.has_node("LockedLabel"):

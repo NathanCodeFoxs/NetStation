@@ -1,0 +1,438 @@
+[gd_scene format=3 uid="uid://drag_drop_lvl2"]
+
+[ext_resource type="Script" path="res://scripts/level_2.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bx2xf3mnwjgc" path="res://assets/backgrounds/Background1.png" id="1_bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_track"]
+bg_color = Color(0.3137255, 0.15686275, 0.11764706, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.23529412, 0.15686275, 0.11764706, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_popup"]
+bg_color = Color(0.15686275, 0.19607843, 0.3137255, 0.95)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.39215687, 0.5882353, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 8
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wagon"]
+bg_color = Color(0.2, 0.25, 0.35, 0.9)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.5, 0.6, 0.8, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_passenger"]
+bg_color = Color(0.95, 0.95, 0.85, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.4, 0.3, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Level2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bg")
+stretch_mode = 5
+
+[node name="ModalOverlay" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="PopupPanel" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(900, 580)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -255.0
+offset_right = 450.0
+offset_bottom = 325.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_popup")
+
+[node name="PopupMargin" type="MarginContainer" parent="PopupPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 30
+
+[node name="PopupContent" type="VBoxContainer" parent="PopupPanel/PopupMargin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PopupTitle" type="Label" parent="PopupPanel/PopupMargin/PopupContent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 32
+text = "Types of Network"
+horizontal_alignment = 1
+
+[node name="ContentText" type="Label" parent="PopupPanel/PopupMargin/PopupContent"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "Networks come in different sizes..."
+autowrap_mode = 2
+
+[node name="ProgressLabel" type="Label" parent="PopupPanel/PopupMargin/PopupContent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.78, 0.78, 1)
+theme_override_font_sizes/font_size = 17
+text = "Slide 1 / 5"
+horizontal_alignment = 1
+
+[node name="NavButtons" type="HBoxContainer" parent="PopupPanel/PopupMargin/PopupContent"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="PrevButton" type="Button" parent="PopupPanel/PopupMargin/PopupContent/NavButtons"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+disabled = true
+text = "← Back"
+
+[node name="NextButton" type="Button" parent="PopupPanel/PopupMargin/PopupContent/NavButtons"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Next →"
+
+[node name="TopRightAnchor" type="Control" parent="PopupPanel"]
+visible = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CloseButton" type="Button" parent="PopupPanel/TopRightAnchor"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -55.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 52.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 22
+text = "✕"
+flat = true
+
+[node name="GameArea" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PassengerCard" type="PanelContainer" parent="GameArea"]
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_passenger")
+
+[node name="Margin" type="MarginContainer" parent="GameArea/PassengerCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 20
+
+[node name="Content" type="VBoxContainer" parent="GameArea/PassengerCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Header" type="Label" parent="GameArea/PassengerCard/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.6, 1)
+theme_override_font_sizes/font_size = 22
+text = "🎫 Passenger Ticket"
+horizontal_alignment = 1
+
+[node name="PersonIcon" type="Label" parent="GameArea/PassengerCard/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 54
+text = "👤"
+horizontal_alignment = 1
+
+[node name="TicketInfo" type="Label" parent="GameArea/PassengerCard/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "A short-range network connecting personal devices."
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="WagonsContainer" type="HBoxContainer" parent="GameArea"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -230.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="PAN_Wagon" type="PanelContainer" parent="GameArea/WagonsContainer"]
+custom_minimum_size = Vector2(220, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wagon")
+
+[node name="Content" type="VBoxContainer" parent="GameArea/WagonsContainer/PAN_Wagon"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Icon" type="Label" parent="GameArea/WagonsContainer/PAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "📱"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="GameArea/WagonsContainer/PAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "PAN"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="GameArea/WagonsContainer/PAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Personal Area
+Network"
+horizontal_alignment = 1
+
+[node name="LAN_Wagon" type="PanelContainer" parent="GameArea/WagonsContainer"]
+custom_minimum_size = Vector2(220, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wagon")
+
+[node name="Content" type="VBoxContainer" parent="GameArea/WagonsContainer/LAN_Wagon"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Icon" type="Label" parent="GameArea/WagonsContainer/LAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "🏢"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="GameArea/WagonsContainer/LAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "LAN"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="GameArea/WagonsContainer/LAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Local Area
+Network"
+horizontal_alignment = 1
+
+[node name="MAN_Wagon" type="PanelContainer" parent="GameArea/WagonsContainer"]
+custom_minimum_size = Vector2(220, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wagon")
+
+[node name="Content" type="VBoxContainer" parent="GameArea/WagonsContainer/MAN_Wagon"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Icon" type="Label" parent="GameArea/WagonsContainer/MAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "🏙️"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="GameArea/WagonsContainer/MAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "MAN"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="GameArea/WagonsContainer/MAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Metropolitan
+Area Network"
+horizontal_alignment = 1
+
+[node name="WAN_Wagon" type="PanelContainer" parent="GameArea/WagonsContainer"]
+custom_minimum_size = Vector2(220, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wagon")
+
+[node name="Content" type="VBoxContainer" parent="GameArea/WagonsContainer/WAN_Wagon"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Icon" type="Label" parent="GameArea/WagonsContainer/WAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "🌍"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="GameArea/WagonsContainer/WAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "WAN"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="GameArea/WagonsContainer/WAN_Wagon/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Wide Area
+Network"
+horizontal_alignment = 1
+
+[node name="InstructionLabel" type="Label" parent="GameArea"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -270.0
+offset_right = 300.0
+offset_bottom = -240.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Drag the passenger to the correct network wagon!"
+horizontal_alignment = 1
+
+[node name="FeedbackLabel" type="Label" parent="GameArea"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 130.0
+offset_right = 300.0
+offset_bottom = 190.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+
+[node name="ProgressBarContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+z_index = 10
+
+[node name="TrackPanel" type="Panel" parent="ProgressBarContainer"]
+custom_minimum_size = Vector2(1100, 40)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_track")
+
+[node name="StartStation" type="Label" parent="ProgressBarContainer"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 25.0
+offset_right = 94.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 32
+text = "🏁"
+
+[node name="EndStation" type="Label" parent="ProgressBarContainer"]
+layout_mode = 0
+offset_left = 1150.0
+offset_top = 25.0
+offset_right = 1194.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 32
+text = "🏢"
+
+[node name="TrainIcon" type="Label" parent="ProgressBarContainer"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 20.0
+offset_right = 145.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 40
+text = "🚂"

@@ -249,9 +249,11 @@ func finish_level() -> void:
 	if next_button.pressed.is_connected(_on_next_pressed):
 		next_button.pressed.disconnect(_on_next_pressed)
 	next_button.pressed.connect(_on_finish_pressed)
+	
+	# ✅ Unlock Level 2!
+	GameProgress.complete_level(1, quiz_score, quiz.size())
 
 func _on_finish_pressed() -> void:
-	# TODO: Unlock Level 2 via save system
 	get_tree().change_scene_to_file("res://scenes/level_select.tscn")
 
 # ─── TRAIN ANIMATION ───────────────────────────────────────

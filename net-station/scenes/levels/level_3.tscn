@@ -1,0 +1,232 @@
+[gd_scene format=3 uid="uid://d00avtehboi4x"]
+
+[ext_resource type="Texture2D" uid="uid://bx2xf3mnwjgc" path="res://assets/backgrounds/Background1.png" id="1_bg"]
+[ext_resource type="Script" uid="uid://dt6rhjr8a5r8r" path="res://scripts/level_3.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_popup"]
+bg_color = Color(0.15686275, 0.19607843, 0.3137255, 0.95)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.39215687, 0.5882353, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_track"]
+bg_color = Color(0.3137255, 0.15686275, 0.11764706, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.23529412, 0.15686275, 0.11764706, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 5
+
+[node name="Level3" type="Control" unique_id=2054421736]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background1" type="TextureRect" parent="." unique_id=909416429]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bg")
+stretch_mode = 5
+
+[node name="ModalOverlay" type="ColorRect" parent="." unique_id=280198421]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="PopupPanel" type="PanelContainer" parent="." unique_id=784526316]
+visible = false
+custom_minimum_size = Vector2(900, 620)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -275.0
+offset_right = 450.0
+offset_bottom = 345.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_popup")
+
+[node name="PopupMargin" type="MarginContainer" parent="PopupPanel" unique_id=1749318452]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 30
+
+[node name="PopupContent" type="VBoxContainer" parent="PopupPanel/PopupMargin" unique_id=695921750]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="PopupTitle" type="Label" parent="PopupPanel/PopupMargin/PopupContent" unique_id=1017629220]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9019608, 0.39215687, 1)
+theme_override_font_sizes/font_size = 32
+text = "Basic Network Devices"
+horizontal_alignment = 1
+
+[node name="ContentText" type="Label" parent="PopupPanel/PopupMargin/PopupContent" unique_id=87614337]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "Router, Switch, Modem, Access Point..."
+autowrap_mode = 2
+
+[node name="ProgressLabel" type="Label" parent="PopupPanel/PopupMargin/PopupContent" unique_id=561820734]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78431374, 0.78431374, 0.78431374, 1)
+theme_override_font_sizes/font_size = 17
+text = "Slide 1 / 5"
+horizontal_alignment = 1
+
+[node name="AnswerButtons" type="VBoxContainer" parent="PopupPanel/PopupMargin/PopupContent" unique_id=1994636562]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="AnswerA" type="Button" parent="PopupPanel/PopupMargin/PopupContent/AnswerButtons" unique_id=1714010799]
+custom_minimum_size = Vector2(820, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "A) Option here"
+alignment = 0
+
+[node name="AnswerB" type="Button" parent="PopupPanel/PopupMargin/PopupContent/AnswerButtons" unique_id=2142964916]
+custom_minimum_size = Vector2(820, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "B) Option here"
+alignment = 0
+
+[node name="AnswerC" type="Button" parent="PopupPanel/PopupMargin/PopupContent/AnswerButtons" unique_id=1089454935]
+custom_minimum_size = Vector2(820, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "C) Option here"
+alignment = 0
+
+[node name="AnswerD" type="Button" parent="PopupPanel/PopupMargin/PopupContent/AnswerButtons" unique_id=1654898029]
+custom_minimum_size = Vector2(820, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "D) Option here"
+alignment = 0
+
+[node name="FeedbackLabel" type="Label" parent="PopupPanel/PopupMargin/PopupContent" unique_id=1939574936]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+
+[node name="NavButtons" type="HBoxContainer" parent="PopupPanel/PopupMargin/PopupContent" unique_id=780094132]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="PrevButton" type="Button" parent="PopupPanel/PopupMargin/PopupContent/NavButtons" unique_id=1085516809]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+disabled = true
+text = "← Back"
+
+[node name="NextButton" type="Button" parent="PopupPanel/PopupMargin/PopupContent/NavButtons" unique_id=212523881]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Next →"
+
+[node name="TopRightAnchor" type="Control" parent="PopupPanel" unique_id=930945209]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CloseButton" type="Button" parent="PopupPanel/TopRightAnchor" unique_id=1438888239]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -55.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 52.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 22
+text = "✕"
+flat = true
+
+[node name="ProgressBarContainer" type="Control" parent="." unique_id=2108654481]
+z_index = 10
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="TrackPanel" type="Panel" parent="ProgressBarContainer" unique_id=441139777]
+custom_minimum_size = Vector2(1100, 40)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_track")
+
+[node name="StartStation" type="Label" parent="ProgressBarContainer" unique_id=1087206014]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 25.0
+offset_right = 94.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 32
+text = "🏁"
+
+[node name="EndStation" type="Label" parent="ProgressBarContainer" unique_id=1025176991]
+layout_mode = 0
+offset_left = 1150.0
+offset_top = 25.0
+offset_right = 1194.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 32
+text = "🏢"
+
+[node name="TrainIcon" type="Label" parent="ProgressBarContainer" unique_id=1210343481]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 20.0
+offset_right = 145.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 40
+text = "🚂"

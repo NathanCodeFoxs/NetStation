@@ -1,44 +1,63 @@
 extends Control
 
 # ========================================
-# LEVEL DATA - Introduction to Networks
+# LEVEL DATA - Basic Network Devices
 # ========================================
 
-var level_title = "Introduction to Networks"
+var level_title = "Basic Network Devices"
 
 var slides = [
-	"What is a network?\n\nA network is a group of computers and devices that are connected together. Think of it like a team where all members can talk to each other and share things.",
-	"Why do we need networks?\n\nWe use networks so that computers and devices can share files, access the internet, send messages, and use resources like printers. It makes working and sharing much easier!",
-	"Example:\n\nImagine you're in your school's computer lab. There are many computers and a printer. Instead of each computer having its own printer, all the computers are connected to a single printer through a network.\n\nWhen you print your homework, your computer sends the print job over the network to the shared printer. This way, everyone in the lab can share the printer easily without needing a separate printer for each computer."
+	"Basic Network Devices\n\nRouter, Switch, Modem, Access Point, and Network Cable are the most commonly known network devices. These devices can connect to each other through wired or wireless connections.",
+	
+	"Layer 1 Devices - Physical Layer:\n\n• Hub: A central connection point for devices in a LAN.\n\n• Repeater: Regenerates signals to extend the range of a network.\n\n• Modem: Connects your home network to the internet.",
+	
+	"Layer 2 Devices - Data Link Layer:\n\n• Switch: Connects devices within a LAN.\n\n• Bridge: Connects two separate LAN segments to make them appear as one.\n\n• Access Point: Extends Wi-Fi coverage.",
+	
+	"Layer 3 Devices - Network Layer:\n\n• Router: Connects different networks and directs data.\n\n• Brouter (Bridge Router): A hybrid device that acts as both a Bridge and a Router.",
+	
+	"Layer 4-7 Devices - Advanced Processing:\n\n• Gateway: A translator between two dissimilar networks.\n\n• Firewall: Security guard. Controls incoming and outgoing traffic based on security rules."
 ]
 
 var quiz = [
 	{
-		"question": "Based on the previous slides, what is the main purpose of a network?",
+		"question": "Which device broadcasts data to all ports regardless of the destination?",
 		"answers": [
-			"To make computers faster",
-			"To connect devices so they can share information and resources",
-			"To turn off devices automatically"
+			"Hub",
+			"Router",
+			"Switch",
+			"Bridge"
 		],
-		"correct": 1
+		"correct": 0  # A = Hub
 	},
 	{
-		"question": "Which of these is a common resource shared over a network?",
+		"question": "Which device converts digital signals to analog and vice versa for internet connection over telephone or cable lines?",
 		"answers": [
-			"A game console",
-			"A printer",
-			"A TV"
+			"Router",
+			"Switch",
+			"Modem",
+			"Access Point"
 		],
-		"correct": 1
+		"correct": 2  # C = Modem
 	},
 	{
-		"question": "If you send an email to your friend, what is likely happening?",
+		"question": "Which device functions both as a bridge and a router?",
 		"answers": [
-			"Your computer is playing a game",
-			"Your computer is sending information over the network to your friend's email server",
-			"Your computer is turning off"
+			"Gateway",
+			"Multilayer Switch",
+			"Brouter",
+			"Firewall"
 		],
-		"correct": 1
+		"correct": 2  # C = Brouter
+	},
+	{
+		"question": "Which of the following devices does NOT break/increase the broadcast domain?",
+		"answers": [
+			"Hub",
+			"Switch",
+			"Repeater",
+			"Router"
+		],
+		"correct": 0  # A = Hub
 	}
 ]
 
@@ -63,6 +82,7 @@ var level_finished: bool = false
 @onready var answer_a: Button = $PopupPanel/PopupMargin/PopupContent/AnswerButtons/AnswerA
 @onready var answer_b: Button = $PopupPanel/PopupMargin/PopupContent/AnswerButtons/AnswerB
 @onready var answer_c: Button = $PopupPanel/PopupMargin/PopupContent/AnswerButtons/AnswerC
+@onready var answer_d: Button = $PopupPanel/PopupMargin/PopupContent/AnswerButtons/AnswerD
 @onready var nav_buttons: HBoxContainer = $PopupPanel/PopupMargin/PopupContent/NavButtons
 @onready var prev_button: Button = $PopupPanel/PopupMargin/PopupContent/NavButtons/PrevButton
 @onready var next_button: Button = $PopupPanel/PopupMargin/PopupContent/NavButtons/NextButton
@@ -80,6 +100,7 @@ func _ready() -> void:
 	answer_a.pressed.connect(_on_answer_selected.bind(0))
 	answer_b.pressed.connect(_on_answer_selected.bind(1))
 	answer_c.pressed.connect(_on_answer_selected.bind(2))
+	answer_d.pressed.connect(_on_answer_selected.bind(3))
 
 	# Set train at START position
 	train_icon.position.x = 90.0
@@ -152,13 +173,14 @@ func load_quiz_question(index: int) -> void:
 	feedback_label.visible = false
 	nav_buttons.visible = false
 
-	# Set answer text
+	# Set answer text (4 options: A, B, C, D)
 	answer_a.text = "A)  " + q["answers"][0]
 	answer_b.text = "B)  " + q["answers"][1]
 	answer_c.text = "C)  " + q["answers"][2]
+	answer_d.text = "D)  " + q["answers"][3]
 
 	# Reset all answer button states
-	for btn in [answer_a, answer_b, answer_c]:
+	for btn in [answer_a, answer_b, answer_c, answer_d]:
 		btn.disabled = false
 		btn.modulate = Color(1, 1, 1)
 
@@ -194,7 +216,7 @@ func _on_answer_selected(answer_index: int) -> void:
 	var q: Dictionary = quiz[quiz_current_index]
 
 	# Disable all answer buttons immediately
-	for btn in [answer_a, answer_b, answer_c]:
+	for btn in [answer_a, answer_b, answer_c, answer_d]:
 		btn.disabled = true
 
 	feedback_label.visible = true
@@ -203,12 +225,12 @@ func _on_answer_selected(answer_index: int) -> void:
 		quiz_score += 1
 		feedback_label.text = "✓  Correct! Well done!"
 		feedback_label.add_theme_color_override("font_color", Color(0.2, 1.0, 0.4))
-		[answer_a, answer_b, answer_c][answer_index].modulate = Color(0.5, 1.0, 0.5)
+		[answer_a, answer_b, answer_c, answer_d][answer_index].modulate = Color(0.5, 1.0, 0.5)
 	else:
-		feedback_label.text = "✗  Incorrect — correct answer: %s" % ["A", "B", "C"][q["correct"]]
+		feedback_label.text = "✗  Incorrect — correct answer: %s" % ["A", "B", "C", "D"][q["correct"]]
 		feedback_label.add_theme_color_override("font_color", Color(1.0, 0.35, 0.35))
-		[answer_a, answer_b, answer_c][answer_index].modulate = Color(1.0, 0.45, 0.45)
-		[answer_a, answer_b, answer_c][q["correct"]].modulate = Color(0.5, 1.0, 0.5)
+		[answer_a, answer_b, answer_c, answer_d][answer_index].modulate = Color(1.0, 0.45, 0.45)
+		[answer_a, answer_b, answer_c, answer_d][q["correct"]].modulate = Color(0.5, 1.0, 0.5)
 
 	# Advance train
 	update_train_position(current_step + 1)
@@ -232,7 +254,7 @@ func finish_level() -> void:
 	update_train_position(total_steps)
 
 	popup_title.text = "Level Complete! 🎉"
-	content_text.text = "Congratulations!\n\nYou scored  %d / %d  (%.0f%%)\n\nYou've learned the basics of computer networks!" \
+	content_text.text = "Congratulations!\n\nYou scored  %d / %d  (%.0f%%)\n\nYou've learned about basic network devices!" \
 		% [quiz_score, quiz.size(), percentage]
 	progress_label.text = "🏁  Great job!"
 
@@ -250,8 +272,8 @@ func finish_level() -> void:
 		next_button.pressed.disconnect(_on_next_pressed)
 	next_button.pressed.connect(_on_finish_pressed)
 	
-	# ✅ Unlock Level 2!
-	GameProgress.complete_level(1, quiz_score, quiz.size())
+	# ✅ Unlock Level 4!
+	GameProgress.complete_level(3, quiz_score, quiz.size())
 
 func _on_finish_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/level_select.tscn")

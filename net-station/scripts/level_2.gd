@@ -1,7 +1,7 @@
 extends Control
 
 # ========================================
-# LEVEL DATA - Network Types
+# LEVEL DATA - Types of Network
 # ========================================
 
 var level_title = "Types of Network"
